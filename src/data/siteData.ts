@@ -21,7 +21,7 @@ export const profile: Profile = {
   positioning: "Marketing, Branding & Digital Growth Partner",
   role: "CMO / Leader Marketing",
   company: "Hazna Berkah Indonesia",
-  bio: "Saya Anggit Prakoso, CMO / Leader Marketing di Hazna Berkah Indonesia. Saya memiliki pengalaman langsung mengembangkan brand F&B Java Tea, Javacafe, dan New Story, dengan keahlian menyeluruh dalam marketing, branding, konten, website, iklan digital, dan creative direction. Saya membantu pemilik UMKM dan bisnis F&B menemukan langkah yang praktis untuk merapikan bisnis serta mengarahkan pertumbuhannya.",
+  bio: "Saya Anggit Prakoso, CMO / Leader Marketing di Hazna Berkah Indonesia. Saya terlibat langsung dalam pengembangan Java Tea, Javacafe, dan New Story.",
   brands: ["Java Tea", "Javacafe", "New Story"],
   expertise: [
     "Marketing",
@@ -41,10 +41,10 @@ export const profile: Profile = {
 export const hero: HeroContent = {
   badge: "Marketing • Branding • Digital Growth Partner",
   headline: "Bantu UMKM & Bisnis F&B Tampil Lebih Profesional, Promosi Lebih Terarah, dan Siap Bertumbuh.",
-  description: "Pendekatan praktis, strategis, dan realistis untuk pemilik bisnis yang ingin merapikan brand, konten, website, hingga promosi digital tanpa pusing dengan jargon yang rumit.",
+  description: "Saya membantu UMKM, bisnis kuliner, dan brand lokal merapikan merek, konten, website, dan promosi agar pelanggan lebih mudah mengenal dan menghubungi Anda.",
   primaryCtaLabel: "Konsultasi via WhatsApp",
-  secondaryCtaLabel: "Lihat Pengalaman",
-  secondaryCtaHref: "#portofolio",
+  secondaryCtaLabel: "Lihat Paket Harga",
+  secondaryCtaHref: "/#paket",
   stats: [
     {
       id: "marketing-leadership",
@@ -68,37 +68,43 @@ export const problems: readonly ProblemItem[] = [
   {
     id: "posting-belum-berhasil",
     title: "Sudah posting tetapi hasil belum terasa",
-    description: "Konten sudah rutin diunggah, tetapi arah pesan dan tujuan promosinya belum jelas. Mulai dengan merapikan ide, pesan, dan rencana konten agar lebih dekat dengan kebutuhan calon pembeli.",
+    shortLabel: "Konten belum menghasilkan",
+    description: "Konten rutin tayang, tapi belum banyak menarik calon pembeli.",
     recommendedPackageId: "rapikan-brand-konten",
   },
   {
     id: "desain-tidak-konsisten",
     title: "Desain konten berubah-ubah",
-    description: "Warna, gaya desain, dan cara berbicara bisnis sering berganti sehingga sulit dikenali. Susun arah visual dan komunikasi yang konsisten untuk konten serta materi promosi.",
+    shortLabel: "Desain belum konsisten",
+    description: "Warna dan gaya yang sering berganti membuat merek sulit dikenali.",
     recommendedPackageId: "rapikan-brand-konten",
   },
   {
     id: "promosi-spontan",
     title: "Promosi berjalan spontan",
-    description: "Promosi baru dipikirkan ketika penjualan terasa sepi, tanpa prioritas atau rencana yang jelas. Bedah kondisi bisnis terlebih dahulu untuk menentukan langkah yang paling perlu dikerjakan.",
+    shortLabel: "Promosi belum terencana",
+    description: "Promosi baru dipikirkan saat penjualan sepi.",
     recommendedPackageId: "bedah-bisnis-digital",
   },
   {
     id: "brand-belum-profesional",
     title: "Brand belum terlihat profesional",
-    description: "Produk sudah siap ditawarkan, tetapi tampilan dan materi komunikasinya belum membuat pelanggan yakin. Rapikan arah visual, pesan brand, dan materi konten sesuai karakter bisnis.",
+    shortLabel: "Tampilan merek belum rapi",
+    description: "Produk sudah siap, tapi tampilannya belum meyakinkan pelanggan.",
     recommendedPackageId: "rapikan-brand-konten",
   },
   {
     id: "khawatir-budget-iklan",
     title: "Takut budget iklan terbuang",
-    description: "Ingin mencoba iklan, tetapi belum yakin dengan target pembeli, pesan promosi, atau kesiapan bisnis. Tinjau kebutuhan dan prioritas terlebih dahulu agar anggaran digunakan dengan lebih terarah.",
+    shortLabel: "Khawatir iklan boros",
+    description: "Ingin beriklan, tapi belum yakin siapa yang perlu dijangkau.",
     recommendedPackageId: "bedah-bisnis-digital",
   },
   {
     id: "belum-punya-website",
     title: "Belum memiliki website yang meyakinkan",
-    description: "Calon pelanggan belum memiliki halaman yang jelas untuk mengenal bisnis, melihat penawaran, dan menghubungi Anda. Siapkan website atau landing page dengan informasi rapi dan tombol WhatsApp yang mudah ditemukan.",
+    shortLabel: "Butuh website bisnis",
+    description: "Pelanggan belum punya satu tempat untuk melihat penawaran dan menghubungi Anda.",
     recommendedPackageId: "website-landing-page-bisnis",
   },
 ];
@@ -128,7 +134,7 @@ export const services: readonly ServiceItem[] = [
   {
     id: "bedah-brand-marketing",
     title: "Bedah Brand & Marketing Bisnis",
-    description: "Melihat kondisi brand dan pemasaran bisnis Anda saat ini, memahami kendalanya, lalu menyusun urutan tindakan yang jelas agar Anda tahu harus mulai dari mana.",
+    description: "Ketahui apa yang perlu diperbaiki dulu dan langkah untuk memulainya.",
     deliverables: [
       "Review kondisi brand dan marketing bisnis saat ini.",
       "Identifikasi kendala serta bagian yang paling perlu diperbaiki.",
@@ -139,7 +145,7 @@ export const services: readonly ServiceItem[] = [
   {
     id: "rapikan-tampilan-brand",
     title: "Rapikan Tampilan Brand",
-    description: "Menyatukan tampilan dan cara bisnis berbicara agar lebih rapi, mudah dikenali, dan terlihat profesional di mata pelanggan maupun calon mitra.",
+    description: "Buat tampilan dan gaya bahasa merek konsisten agar lebih mudah dikenali.",
     deliverables: [
       "Arah visual sesuai karakter bisnis.",
       "Moodboard sebagai acuan gaya tampilan brand.",
@@ -151,7 +157,7 @@ export const services: readonly ServiceItem[] = [
   {
     id: "konten-bisnis",
     title: "Konten Bisnis Lebih Rapi dan Menjual",
-    description: "Membantu bisnis memiliki ide dan jadwal konten dengan pesan yang jelas, sehingga posting tidak sekadar mengisi media sosial tetapi juga mendukung penawaran bisnis.",
+    description: "Susun ide dan jadwal konten yang membantu pelanggan memahami penawaran Anda.",
     deliverables: [
       "Perencanaan ide konten sesuai kebutuhan bisnis.",
       "Kalender konten agar jadwal posting lebih teratur.",
@@ -163,7 +169,7 @@ export const services: readonly ServiceItem[] = [
   {
     id: "website-landing-page",
     title: "Website / Landing Page Bisnis",
-    description: "Menyusun halaman online yang membantu pengunjung memahami bisnis, melihat manfaat penawaran, dan melanjutkan percakapan melalui WhatsApp dengan mudah.",
+    description: "Tampilkan penawaran bisnis dalam satu halaman dengan akses langsung ke WhatsApp.",
     deliverables: [
       "Struktur halaman yang menjelaskan bisnis dan mengarahkan pengunjung pada penawaran.",
       "Copywriting persuasif yang mudah dipahami calon pelanggan.",
@@ -175,7 +181,7 @@ export const services: readonly ServiceItem[] = [
   {
     id: "iklan-online",
     title: "Iklan Online",
-    description: "Mengarahkan iklan berdasarkan calon pembeli, pesan penawaran, dan kapasitas anggaran bisnis, disertai pemantauan serta evaluasi agar keputusan promosi lebih terukur.",
+    description: "Arahkan iklan ke calon pembeli yang tepat dan tinjau hasilnya sesuai anggaran.",
     deliverables: [
       "Penentuan target audience sesuai penawaran bisnis.",
       "Konsep iklan yang memiliki pesan dan tujuan jelas.",
@@ -188,7 +194,7 @@ export const services: readonly ServiceItem[] = [
   {
     id: "pendampingan-marketing",
     title: "Pendampingan Marketing Bulanan",
-    description: "Menjadi partner diskusi dan pelaksanaan marketing secara rutin, dari menyusun strategi serta campaign hingga meninjau hasil dan menentukan langkah pertumbuhan berikutnya.",
+    description: "Jalankan promosi secara rutin dengan pendampingan dan evaluasi hasil.",
     deliverables: [
       "Diskusi dan pendampingan strategi marketing.",
       "Pendampingan eksekusi strategi serta campaign.",
@@ -206,6 +212,7 @@ export const packages: readonly PackageItem[] = [
     name: "Bedah Bisnis Digital",
     subtitle: "Untuk bisnis yang belum tahu prioritas & harus mulai dari mana.",
     priceText: "Mulai Rp350 ribu",
+    benefit: "Daftar prioritas dan rencana perbaikan bisnis.",
     badge: "Langkah Awal Terbaik",
     features: [
       "Review kondisi brand dan marketing bisnis saat ini.",
@@ -220,13 +227,15 @@ export const packages: readonly PackageItem[] = [
     name: "Rapikan Brand & Konten",
     subtitle: "Untuk bisnis yang ingin tampil lebih rapi dan profesional.",
     priceText: "Mulai Rp750 ribu",
+    benefit: "Acuan visual dan kalender konten.",
     badge: null,
     features: [
-      "Arah visual dan moodboard untuk tampilan brand yang konsisten.",
-      "Arahan tone komunikasi dan materi promosi.",
-      "Perencanaan ide dan kalender konten bisnis.",
+      "Acuan visual brand: arah tampilan dan moodboard.",
+      "Arahan gaya bahasa brand dan materi promosi.",
+      "Rencana ide dan kalender konten untuk panduan posting.",
       "Caption dan konsep campaign sesuai kebutuhan bisnis.",
     ],
+    scopeNote: "Format materi dan jumlah konten disepakati sesuai kebutuhan sebelum kerja sama dimulai.",
     isPopular: false,
   },
   {
@@ -234,6 +243,7 @@ export const packages: readonly PackageItem[] = [
     name: "Website / Landing Page Bisnis",
     subtitle: "Untuk memiliki halaman online profesional yang siap konversi.",
     priceText: "Mulai Rp1,5 juta",
+    benefit: "Halaman penawaran dengan tombol WhatsApp.",
     badge: "Populer untuk UMKM",
     features: [
       "Struktur halaman yang membantu pengunjung memahami penawaran bisnis.",
@@ -248,54 +258,60 @@ export const packages: readonly PackageItem[] = [
     name: "Marketing Jalan Bulanan",
     subtitle: "Untuk pendampingan strategi dan eksekusi rutin setiap bulan.",
     priceText: "Mulai Rp2,5 juta/bulan",
+    benefit: "Pendampingan promosi dan laporan evaluasi.",
     badge: "Partner Pertumbuhan",
     features: [
-      "Partner diskusi strategi marketing secara rutin.",
+      "Diskusi rutin untuk menentukan strategi dan prioritas marketing.",
       "Pendampingan eksekusi strategi dan campaign.",
-      "Evaluasi berkala dan laporan kegiatan marketing.",
-      "Rekomendasi langkah pertumbuhan sesuai kondisi serta kapasitas bisnis.",
+      "Laporan kegiatan marketing beserta evaluasi berkala.",
+      "Rekomendasi langkah berikutnya sesuai kondisi dan kapasitas bisnis.",
     ],
+    scopeNote: "Jumlah sesi diskusi, jadwal laporan, dan cakupan eksekusi disepakati sebelum kerja sama dimulai.",
     isPopular: false,
   },
 ];
 
 export const pricingNote = "Harga bersifat estimasi awal dan dapat disesuaikan dengan cakupan kebutuhan bisnis Anda.";
 
-export const portfolioContentNote = "Nama brand, kategori, pengalaman pengembangan brand, dan angka outlet mengacu pada PRD. Uraian tantangan, cakupan peran, pendekatan, dan insight merupakan kerangka analisis untuk diskusi konsultasi, bukan catatan rinci aktivitas historis yang telah terverifikasi. Pertumbuhan outlet adalah capaian brand, bukan jaminan hasil bagi bisnis lain atau klaim hasil kerja satu orang.";
+export const portfolioContentNote = "Pertumbuhan outlet adalah capaian masing-masing brand, bukan hasil kerja satu orang atau jaminan bagi bisnis lain.";
+export const portfolioAdviceNote = "Saran ini untuk bisnis serupa, bukan catatan pekerjaan yang dilakukan untuk brand ini.";
 
 export const portfolio: readonly PortfolioCaseStudy[] = [
   {
     id: "java-tea",
     brandName: "Java Tea",
     category: "F&B / Minuman & Kemitraan",
-    metricHighlight: "Bertumbuh dari 2 menjadi 70+ Outlet",
-    challenge: "Tantangan yang menjadi fokus analisis: bagaimana brand minuman dan kemitraan mempertahankan tampilan serta pesan yang konsisten ketika berkembang dari 2 outlet menuju jaringan yang lebih luas.",
-    role: "Anggit memiliki pengalaman langsung dalam pengembangan Java Tea. Dalam kerangka konsultasi ini, peran marketing dibahas melalui kaitan strategi bisnis, branding, konten, dan promosi; PRD tidak merinci pembagian tanggung jawab historis pada brand ini.",
-    approach: "Kerangka pendekatan untuk diskusi: pahami penawaran minuman dan kemitraan, rapikan pesan serta arah visual, selaraskan konten dengan kebutuhan calon pelanggan dan mitra, lalu evaluasi promosi sesuai kapasitas bisnis. Rangkaian ini merupakan bahan analisis, bukan klaim urutan pekerjaan historis Java Tea.",
-    result: "Java Tea bertumbuh dari 2 menjadi 70+ outlet sesuai metrik dalam PRD. Tidak tersedia rincian periode, omzet, atau kontribusi masing-masing aktivitas marketing untuk mengaitkan pertumbuhan tersebut dengan satu tindakan tertentu.",
-    insight: "Pelajaran yang dapat dipertimbangkan pemilik UMKM minuman: siapkan pesan penawaran dan tampilan yang konsisten sebelum memperluas promosi, lalu tentukan langkah pertumbuhan sesuai kesiapan bisnis dan kemitraan.",
+    metricValue: "70+",
+    metricLabel: "outlet, dari 2 outlet",
+    challenge: "Bagaimana menjaga tampilan dan pesan tetap konsisten saat jaringan outlet bertambah?",
+    role: "Anggit terlibat langsung dalam pengembangan Java Tea.",
+    approach: "Perjelas penawaran produk dan kemitraan, lalu gunakan arah visual dan pesan yang sama di materi promosi setiap outlet.",
+    result: "Jaringan Java Tea bertumbuh dari 2 menjadi 70+ outlet.",
+    insight: "Sebelum memperluas promosi, siapkan acuan tampilan dan pesan yang bisa digunakan oleh tim dan mitra.",
   },
   {
     id: "javacafe",
     brandName: "Javacafe",
     category: "F&B / Cafe & Kuliner",
-    metricHighlight: "Bertumbuh hingga 125+ Outlet",
-    challenge: "Tantangan yang menjadi fokus analisis: bagaimana brand cafe dan kuliner menjaga kejelasan identitas serta komunikasi penawaran ketika berkembang menjadi jaringan dengan 125+ outlet.",
-    role: "Anggit memiliki pengalaman langsung dalam pengembangan Javacafe. Kerangka pembahasan peran mencakup hubungan marketing, branding, konten, dan creative direction; PRD tidak merinci tugas atau campaign historis yang ditangani pada brand ini.",
-    approach: "Kerangka pendekatan untuk diskusi: kenali kebutuhan pelanggan cafe dan kuliner, susun pesan brand yang mudah dipahami, selaraskan materi promosi dengan penawaran, serta gunakan rencana konten dan evaluasi rutin untuk mengarahkan komunikasi. Ini adalah kerangka konsultasi, bukan dokumentasi aktivitas historis Javacafe.",
-    result: "Javacafe bertumbuh hingga 125+ outlet sesuai metrik dalam PRD. Angka ini menggambarkan capaian jaringan brand; PRD tidak memberikan data omzet, periode pertumbuhan, atau ukuran efektivitas campaign tertentu.",
-    insight: "Pelajaran yang dapat dipertimbangkan pemilik cafe dan usaha kuliner: pastikan pelanggan mudah memahami identitas serta penawaran bisnis, kemudian jaga konsistensi pesan saat menambah kegiatan promosi atau memperluas jaringan.",
+    metricValue: "125+",
+    metricLabel: "outlet",
+    challenge: "Bagaimana membuat identitas dan penawaran kafe tetap jelas saat jaringan berkembang?",
+    role: "Anggit terlibat langsung dalam pengembangan Javacafe.",
+    approach: "Kenali kebutuhan pelanggan kafe, susun pesan penawaran yang mudah dipahami, lalu evaluasi hasil promosi secara berkala.",
+    result: "Jaringan Javacafe bertumbuh hingga 125+ outlet.",
+    insight: "Pastikan pelanggan bisa memahami penawaran yang sama saat melihat konten, promosi, atau mengunjungi outlet.",
   },
   {
     id: "new-story",
     brandName: "New Story",
     category: "F&B / Modern Beverage",
-    metricHighlight: "Bertumbuh hingga 30+ Outlet",
-    challenge: "Tantangan yang menjadi fokus analisis: bagaimana brand modern beverage membangun identitas yang mudah dikenali dan komunikasi produk yang jelas seiring perkembangan jaringan hingga 30+ outlet.",
-    role: "Anggit memiliki pengalaman langsung dalam pengembangan New Story. Kerangka pembahasan peran menghubungkan branding, komunikasi konten, dan arah marketing; PRD tidak merinci tanggung jawab atau pelaksanaan promosi historis pada brand ini.",
-    approach: "Kerangka pendekatan untuk diskusi: pahami karakter produk dan calon pembeli, tetapkan arah visual serta gaya komunikasi, susun ide konten yang menjelaskan penawaran, lalu tinjau kebutuhan promosi berdasarkan kondisi bisnis. Ini merupakan bahan diskusi strategi, bukan klaim aktivitas historis New Story.",
-    result: "New Story bertumbuh hingga 30+ outlet sesuai metrik dalam PRD. Tidak ada data periode, omzet, atau atribusi hasil iklan dalam PRD untuk menyatakan dampak kuantitatif selain pertumbuhan outlet tersebut.",
-    insight: "Pelajaran yang dapat dipertimbangkan pemilik bisnis minuman: tampilan yang menarik perlu didukung pesan produk yang jelas dan rencana konten yang terarah, dengan langkah promosi yang sesuai anggaran serta kesiapan bisnis.",
+    metricValue: "30+",
+    metricLabel: "outlet",
+    challenge: "Bagaimana membuat merek minuman mudah dikenali tanpa membuat penawaran produk sulit dipahami?",
+    role: "Anggit terlibat langsung dalam pengembangan New Story.",
+    approach: "Tentukan calon pembeli dan keunggulan produknya, lalu susun gaya visual dan ide konten yang menjelaskan penawaran.",
+    result: "Jaringan New Story bertumbuh hingga 30+ outlet.",
+    insight: "Lengkapi tampilan yang menarik dengan pesan produk yang jelas dan pilih promosi sesuai anggaran.",
   },
 ];
 
@@ -382,11 +398,11 @@ export const contactLinks = {
 } as const;
 
 export const navigation: readonly NavigationItem[] = [
-  { label: "Tentang", href: "#tentang" },
-  { label: "Layanan", href: "#layanan" },
-  { label: "Paket", href: "#paket" },
-  { label: "Portofolio", href: "#portofolio" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Tentang", href: "/#tentang" },
+  { label: "Paket", href: "/#paket" },
+  { label: "Layanan", href: "/#layanan" },
+  { label: "Portofolio", href: "/portofolio/" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export const businessTypes: readonly string[] = [
@@ -404,27 +420,25 @@ export const sectionCopy = {
     consultationLabel: "Chat WA",
   },
   problems: {
-    title: "Cek Kondisi Bisnis Anda: Mana yang Paling Sering Anda Rasakan?",
-    instruction: "Ketuk masalah yang sedang dialami bisnis Anda saat ini (bisa pilih lebih dari satu):",
+    title: "Apa kendala bisnis Anda?",
+    instruction: "Ketuk kendala untuk membuka formulir dengan kebutuhan yang sudah terisi.",
     selectionSummary: (count: number): string => `Anda memilih ${count} masalah bisnis. Lihat rekomendasi paket atau langsung diskusikan solusinya.`,
     consultationLabel: "Konsultasikan Masalah Ini",
   },
   solutions: { title: "Gambaran Solusi untuk Bisnis Anda" },
   about: { title: "Tentang Anggit", principlesTitle: "Pendekatan Kerja" },
   services: { title: "Layanan untuk Kebutuhan Bisnis Anda" },
-  packages: { title: "Paket & Estimasi Investasi", ctaLabel: "Pilih Paket Ini" },
+  packages: { title: "Paket & Estimasi Investasi", deliverablesLabel: "Apa yang didapat", ctaLabel: "Pilih Paket Ini" },
   portfolio: {
-    title: "Portofolio & Studi Kasus Nyata",
-    tabs: ["Ringkasan", "Strategi & Peran", "Hasil & Insight"],
+    title: "Pengalaman & Portofolio",
     fieldLabels: {
-      challenge: "Tantangan awal",
-      role: "Peran saya",
-      approach: "Pendekatan",
-      result: "Hasil",
-      insight: "Insight",
+      challenge: "Topik analisis",
+      role: "Pengalaman Anggit",
+      approach: "Saran strategi untuk bisnis serupa",
+      result: "Capaian brand",
+      insight: "Pelajaran untuk bisnis Anda",
     },
-    ctaLabel: (brandName: string): string => `Ingin diskusi strategi seperti ${brandName}?`,
-    applyApproachLabel: "Terapkan Pendekatan Ini di Bisnis Saya",
+    ctaLabel: (brandName: string): string => `Diskusi dengan referensi ${brandName}`,
   },
   consultation: { title: "Mulai dari memahami bisnis Anda terlebih dahulu." },
   testimonials: { title: "Ilustrasi Dampak Kerja Sama", disclosure: testimonialDisclosure },
@@ -443,7 +457,8 @@ export const sectionCopy = {
   finalCta: {
     headline: "Siap membuat bisnis Anda tampil lebih profesional dan promosinya lebih terarah?",
     primaryCtaLabel: "Konsultasi via WhatsApp",
-    secondaryCtaLabel: "Email Anggit",
+    secondaryCtaLabel: "Lihat Paket Harga",
+    secondaryCtaHref: "#paket",
   },
 } as const;
 
@@ -451,6 +466,38 @@ export const seo = {
   title: "Anggit Prakoso | Marketing, Branding & Digital Growth Partner UMKM & F&B",
   description: "Anggit Prakoso membantu UMKM dan bisnis F&B merapikan branding, konten, website, serta promosi digital. Temukan layanan, estimasi paket, pengalaman pengembangan brand, dan konsultasikan kebutuhan bisnis Anda via WhatsApp.",
   locale: "id_ID",
+} as const;
+
+export const presentation = {
+  hero: {
+    titleFirst: "Brand lebih kuat.",
+    titleSecond: "Bisnis siap",
+    titleAccent: "bertumbuh.",
+    mobileCta: "Konsultasi via WA",
+    photoLabel: "STRATEGI → EKSEKUSI",
+    metricLabel: "Total outlet brand",
+    metricNote: "dalam pengalaman pengembangan",
+  },
+  about: { title: "Pengalaman di bisnis F&B" },
+  diagnostic: { label: "Mulai dari bisnis Anda" },
+  services: {
+    label: "Dari strategi ke eksekusi",
+    description: "Pilih bantuan yang paling dibutuhkan bisnis Anda sekarang.",
+    scopeLabel: "Lihat cakupan layanan",
+  },
+  portfolio: {
+    label: "Pengalaman & perspektif",
+    description: "Pengalaman pengembangan brand dan pelajaran untuk bisnis serupa.",
+    noteLabel: "Konteks pengalaman & angka pertumbuhan",
+  },
+  packages: {
+    label: "Investasi untuk langkah berikutnya",
+    description: "Mulai dari yang paling dibutuhkan. Pilih bantuan yang sesuai dengan tahap dan prioritas bisnis Anda.",
+  },
+  process: { label: "Cara kita bekerja sama" },
+  faq: { label: "Sebelum mulai berdiskusi", cta: "Masih ada pertanyaan? Mari diskusi" },
+  closing: { label: "Langkah berikutnya dimulai dari obrolan", title: "Bisnis Anda layak", titleAccent: "naik kelas." },
+  footer: { backToTop: "Kembali ke atas" },
 } as const;
 
 export function getRecommendedPackage(selectedProblems: readonly string[]): PackageItem {
@@ -495,4 +542,5 @@ export const siteData = {
   businessTypes,
   sectionCopy,
   seo,
+  presentation,
 } as const;

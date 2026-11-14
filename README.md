@@ -32,7 +32,11 @@ Gambar berbagi sosial dibuat secara statis pada `/og-image.png`.
 
 ## Foto personal
 
-Simpan foto Anggit di `public/images/anggit-prakoso.webp`, dengan rasio 4:5 dan ukuran ideal 1200 × 1500 piksel. Selama file belum tersedia atau gagal dimuat, Hero dan Tentang menampilkan visual monogram AP. Kedua komponen juga menerima prop `portraitSrc` untuk menggunakan lokasi aset lain.
+Foto di beranda menggunakan `public/images/anggit-prakoso.jpg`. Jika foto gagal dimuat, bagian pembuka menampilkan monogram AP. Komponen Hero juga menerima prop `portraitSrc` untuk menggunakan lokasi aset lain.
+
+## Portofolio
+
+Beranda menampilkan tiga karya pilihan di `/#portofolio`. Daftar lengkap ada di `/portofolio/`; setiap entri di array `portfolio` menghasilkan halaman statis `/portofolio/[id]/` saat build. Gunakan ID yang unik dan stabil. Untuk menyertakan foto proyek, tambahkan `photo` dengan path aset di `public/`, teks alternatif, keterangan, lebar, dan tinggi. Tanpa foto, halaman tetap menampilkan profil dan capaian brand tanpa gambar pengganti.
 
 ## Konsultasi WhatsApp
 

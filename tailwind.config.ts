@@ -5,11 +5,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "#FAF9F6",
+        canvas: "#F7F8FC",
         surface: "#FFFFFF",
-        credibility: "#0F172A",
-        "brand-blue": "#2563EB",
-        "growth-green": "#059669",
+        credibility: "#111D38",
+        "brand-blue": "#2448ED",
       },
       fontFamily: {
         heading: ["var(--font-plus-jakarta-sans)", "Arial", "sans-serif"],

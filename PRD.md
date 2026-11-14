@@ -40,13 +40,13 @@ Buat sebuah React Context bernama `ConsultationContext` yang menyimpan state ber
 
 ### Alur Keterkaitan Fitur (User Flow):
 1. **Dari Section Masalah UMKM ke Solusi & Paket:**
-   Pengunjung dapat mengklik/memilih satu atau beberapa kartu masalah di Section 6.3. Saat dipilih, kartu menyala (`border-blue-600 bg-blue-50/40`), dan muncul *floating banner* kecil di bawah section tersebut: *"Anda memilih X masalah bisnis. Lihat rekomendasi paket atau langsung diskusikan solusinya."*
+   Mengetuk kartu masalah di bagian 4.3 langsung membuka Smart WhatsApp Drawer dengan kendala terisi. Setelah menutup drawer, pengunjung bisa menambah atau membatalkan pilihan. Rekomendasi paket tetap tampil selama ada kendala terpilih.
 2. **Dari Section Portofolio ke Konsultasi:**
    Di dalam setiap studi kasus (Java Tea, Javacafe, New Story), terdapat tombol *"Terapkan Pendekatan Ini di Bisnis Saya"*. Jika diklik, `portfolioReference` terisi dan langsung membuka **Smart WhatsApp Drawer**.
 3. **Dari Section Layanan & Paket ke Smart WhatsApp Drawer:**
    Saat pengunjung mengklik tombol pada salah satu dari 6 Layanan atau 4 Paket Harga, `selectedServiceOrPackage` otomatis terisi dengan nama paket/layanan tersebut dan membuka **Smart WhatsApp Drawer**.
 4. **Smart WhatsApp Drawer (Modal Bottom-Sheet Interaktif):**
-   Ketika terbuka, pengunjung melihat ringkasan pilihan mereka (masalah yang dipilih + paket/layanan yang diminati) dan hanya perlu mengisi input singkat:
+   Kolom inti tampil lebih dulu. Kebutuhan otomatis terisi dari pilihan pengunjung. Ringkasan (jika ada pilihan) dan daftar paket opsional yang dapat dibuka berada setelah kolom isian:
    - Nama (`input text`)
    - Nama Bisnis (`input text`)
    - Jenis Bisnis (`pilihan tombol cepat/chips`: Cafe/Kedai, Restoran/Kuliner, Minuman/Franchise, UMKM Produk/Jasa Lainnya)
@@ -58,21 +58,23 @@ Buat sebuah React Context bernama `ConsultationContext` yang menyimpan state ber
 
 ## 4. Spesifikasi Detail Per Section & Data Konten
 
+Urutan baca: hero → pengalaman singkat Anggit → kendala bisnis → paket dan harga → layanan → karya pilihan → proses, FAQ, dan penutup WhatsApp. Pendekatan kerja, gambaran solusi, dan ilustrasi dampak tetap tersedia dalam bagian yang dapat dibuka. Daftar portofolio dan profil brand berada di halaman terpisah dengan header, footer, dan formulir konsultasi yang sama.
+
 ### 4.1 Header & Mobile Bottom Navigation
 - **Top Header (Desktop & Mobile):**
   - Kiri: Logo Monogram `AP` dalam kotak *rounded* berwarna `#0F172A` + teks **Anggit Prakoso**.
-  - Tengah (Desktop): Navigasi *smooth-scroll* ke `#tentang`, `#layanan`, `#paket`, `#portofolio`, `#faq`.
+  - Tengah (Desktop): Navigasi ke `/#tentang`, `/#paket`, `/#layanan`, `/portofolio/`, dan `/#faq`.
   - Kanan: Tombol `Konsultasi` (Membuka Smart WhatsApp Drawer).
 - **Sticky Mobile Bottom Bar (Khusus layar `< 768px`):**
   - Muncul melayang di bagian bawah layar HP agar mudah dijangkau ibu jari.
-  - Berisi 3 akses cepat: `Paket Harga` (scroll ke `#paket`), `Bukti Karya` (scroll ke `#portofolio`), dan tombol hijau menonjol `Chat WA` (membuka Smart WhatsApp Drawer).
+  - Berisi 3 akses cepat: `Paket Harga` (`/#paket`), `Bukti Karya` (`/portofolio/`), dan tombol biru `Chat WA` (membuka Smart WhatsApp Drawer).
 
 ### 4.2 Hero Section
 - **Badge Atas:** `Marketing • Branding • Digital Growth Partner`
 - **Headline Utama:** "Bantu UMKM & Bisnis F&B Tampil Lebih Profesional, Promosi Lebih Terarah, dan Siap Bertumbuh."
 - **Deskripsi Singkat:** Pendekatan praktis, strategis, dan realistis untuk pemilik bisnis yang ingin merapikan brand, konten, website, hingga promosi digital tanpa pusing dengan jargon yang rumit.
 - **CTA Primer:** Tombol hijau/biru `"Konsultasi via WhatsApp"` (Membuka Smart WhatsApp Drawer).
-- **CTA Sekunder:** Tombol outline `"Lihat Pengalaman"` (Scroll halus ke `#portofolio`).
+- **CTA Sekunder:** Tombol outline `"Lihat Paket Harga"` (menuju `/#paket`).
 - **Visual Kanan (Atau Atas pada Mobile):**
   - Frame foto personal Anggit Prakoso dengan rasio `4:5` (ukuran ideal `1200x1500 px`, format WebP/JPG, `priority` loading di Next.js, crop kepala hingga badan atas dengan background bersih).
   - **Floating Credibility Cards (Statistik Pengalaman):** Kartu melayang di sudut foto yang menampilkan highlight pencapaian nyata:
@@ -81,8 +83,8 @@ Buat sebuah React Context bernama `ConsultationContext` yang menyimpan state ber
     3. `End-to-End Solution` — Strategi, Brand, Konten, Web & Ads
 
 ### 4.3 Interactive Diagnostic: Masalah UMKM (`#masalah`)
-- **Instruksi UI:** Buat dengan judul *"Cek Kondisi Bisnis Anda: Mana yang Paling Sering Anda Rasakan?"* disertai sub-instruksi *"Ketuk masalah yang sedang dialami bisnis Anda saat ini (bisa pilih lebih dari satu):"*
-- **6 Kartu Masalah Interaktif (Checkable Cards):**
+- **Instruksi UI:** Tampilkan judul "Apa kendala bisnis Anda?" dan jelaskan bahwa mengetuk kendala membuka formulir dengan kebutuhan terisi. Gunakan ikon yang berbeda dan label pendek; pertahankan teks kebutuhan lengkap di draf pesan.
+- **6 Kendala Bisnis:**
   1. `"Sudah posting tetapi hasil belum terasa"`
   2. `"Desain konten berubah-ubah"`
   3. `"Promosi berjalan spontan"`
@@ -130,21 +132,23 @@ Tampilkan 4 kartu paket harga yang transparan. Tambahkan *note* halus: *"Harga b
 | **Website / Landing Page Bisnis** | Untuk memiliki halaman online profesional yang siap konversi | **Mulai Rp1,5 juta** | *Populer untuk UMKM* |
 | **Marketing Jalan Bulanan** | Untuk pendampingan strategi dan eksekusi rutin setiap bulan | **Mulai Rp2,5 juta/bulan** | *Partner Pertumbuhan* |
 
+**Kejelasan hasil paket:** Setiap kartu menampilkan harga, satu manfaat konkret, dan tombol konsultasi. Daftar lengkap beserta catatan cakupan tersedia dalam panel "Apa yang didapat" yang tertutup secara default.
+- **Rapikan Brand & Konten:** Acuan visual brand berupa arah tampilan dan moodboard, arahan gaya bahasa serta materi promosi, rencana ide dan kalender konten, serta caption dan konsep campaign sesuai kebutuhan. Format materi dan jumlah konten disepakati sebelum kerja sama dimulai.
+- **Marketing Jalan Bulanan:** Diskusi rutin strategi dan prioritas marketing, pendampingan eksekusi strategi serta campaign, laporan kegiatan beserta evaluasi berkala, dan rekomendasi langkah berikutnya. Jumlah sesi diskusi, jadwal laporan, dan cakupan eksekusi disepakati sebelum kerja sama dimulai.
+- Jangan menjanjikan format PDF, template Canva, atau kuantitas tertentu yang belum ditetapkan pemilik produk.
+
 *Fitur Fungsional:* Klik tombol `"Pilih Paket Ini"` pada kartu mana pun akan membuka Smart WhatsApp Drawer dengan paket tersebut sudah terpilih.
 
-### 4.8 Portofolio & Studi Kasus Nyata (`#portofolio`)
-- **UI/UX Mobile-Friendly:** Buat 3 Kartu Utama yang menonjolkan metrik pertumbuhan di bagian atas, dilengkapi **Interactive Tab (`Ringkasan` | `Strategi & Peran` | `Hasil & Insight`)** di dalam kartu agar halaman tetap ringkas di HP namun informasinya lengkap.
+### 4.8 Pengalaman & Portofolio
+- **Beranda (`/#portofolio`):** Tampilkan tiga karya pilihan dalam kartu ringkas dengan nama, capaian, dan tautan ke profil. Pertahankan ID bagian untuk tautan lama.
+- **Daftar (`/portofolio/`):** Tampilkan semua profil dengan kategori dan tautan "Lihat profil".
+- **Profil (`/portofolio/[slug]/`):** Gunakan ID brand sebagai slug dan ekspor semua profil saat build. Tampilkan pengalaman Anggit yang diketahui dan capaian brand, lalu bedakan saran untuk bisnis serupa dari fakta historis. Foto proyek bersifat opsional dan hanya digunakan jika ada aset nyata yang diizinkan, beserta teks alternatif dan keterangan.
 - **3 Data Portofolio Utama:**
   1. **Java Tea** (Kategori: F&B / Minuman & Kemitraan) — **Bertumbuh dari 2 menjadi 70+ Outlet**.
   2. **Javacafe** (Kategori: F&B / Cafe & Kuliner) — **Bertumbuh hingga 125+ Outlet**.
   3. **New Story** (Kategori: F&B / Modern Beverage) — **Bertumbuh hingga 30+ Outlet**.
-- **Struktur Wajib di Dalam Setiap Studi Kasus:**
-  - `Tantangan awal`: Kondisi atau masalah sebelum dibantu.
-  - `Peran saya`: Kontribusi dan tanggung jawab Anggit.
-  - `Pendekatan`: Strategi, aktivitas, dan pekerjaan yang dilakukan.
-  - `Hasil`: Angka pertumbuhan outlet dan dampak bisnis yang dicapai.
-  - `Insight`: Pelajaran praktis yang dapat diterapkan pada bisnis UMKM/F&B lain.
-- **Tombol Kontekstual di Bawah Tiap Studi Kasus:** `"Ingin diskusi strategi seperti [Nama Brand]?"` -> Membuka Smart WhatsApp Drawer dengan referensi studi kasus terkait.
+- **Isi kartu:** pengalaman pengembangan Anggit yang diketahui, topik analisis, saran strategi, angka outlet sebagai capaian brand, dan pelajaran praktis. Jangan menyatakan saran sebagai pekerjaan historis, atau menambahkan peran spesifik dan hasil yang belum terkonfirmasi.
+- **Tombol Kontekstual:** `"Diskusi dengan referensi [Nama Brand]"` membuka Smart WhatsApp Drawer dengan referensi brand terkait.
 
 ### 4.9 Proses Konsultasi (4 Langkah Mudah)
 - **Judul Section:** "Mulai dari memahami bisnis Anda terlebih dahulu."
@@ -155,7 +159,7 @@ Tampilkan 4 kartu paket harga yang transparan. Tambahkan *note* halus: *"Harga b
   4. **Tentukan bentuk kerja sama** — Memilih layanan satuan atau paket pendampingan yang paling sesuai.
 
 ### 4.10 Testimonial (Dengan Transparansi & Etika Kredibilitas)
-- **Aturan Ketat:** Gunakan *copy* testimonial di bawah ini dengan menambahkan **Badge Label Jelas** di atas section: `"Contoh Ilustrasi Dampak Kerja Sama (Segera diperbarui dengan ulasan langsung klien)"` dan **DILARANG** menampilkan nama klien palsu seolah-olah nyata.
+- **Aturan Ketat:** Tampilkan kutipan di bawah dalam bagian tertutup secara default di bawah proses konsultasi. Judul dan penjelasan wajib menyatakan bahwa kutipan adalah ilustrasi, bukan ulasan klien. **DILARANG** menampilkan nama klien palsu seolah-olah nyata.
 - **3 Kartu Kutipan:**
   1. *“Mas Anggit membantu kami melihat marketing dengan lebih jelas. Dari yang sebelumnya hanya posting, sekarang kami punya arah konten dan promosi yang lebih terencana.”* — **Ilustrasi Pemilik Bisnis F&B**
   2. *“Yang kami suka adalah pendekatannya praktis. Rekomendasinya tidak hanya terlihat bagus, tetapi bisa disesuaikan dengan kondisi bisnis.”* — **Ilustrasi Pemilik UMKM Berkembang**
@@ -172,7 +176,7 @@ Komponen *Accordion* yang bisa dibuka-tutup dengan animasi halus (`aria-expanded
 - **Headline CTA:** "Siap membuat bisnis Anda tampil lebih profesional dan promosinya lebih terarah?"
 - **Tombol Aksi:**
   - Tombol Primer: `"Konsultasi via WhatsApp"` (Membuka Smart WhatsApp Drawer / `085870061793`).
-  - Tombol Sekunder: `"Kirim Email"` (`mailto:anggit311@gmail.com`).
+  - Tombol Sekunder: `"Lihat Paket Harga"` (scroll ke `#paket`). Kontak email tetap tersedia di footer; WhatsApp menjadi jalur kontak utama pada bagian penutup.
 - **Footer Informasi Resmi:**
   - Nama & Positioning: **Anggit Prakoso** — Marketing, Branding & Digital Growth Partner.
   - Email: `anggit311@gmail.com`

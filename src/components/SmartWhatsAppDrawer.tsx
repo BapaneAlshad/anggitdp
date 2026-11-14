@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight, BriefcaseBusiness, Check, CheckCheck, MessageCircle, PanelsTopLeft, Tag, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, BriefcaseBusiness, Check, CheckCheck, MessageCircle, PanelsTopLeft, Plus, Tag, X } from "lucide-react";
 import { useEffect, useId, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { useConsultation } from "../context/ConsultationContext";
 import { businessTypes, packages, problems, sectionCopy } from "../data/siteData";
@@ -40,6 +41,7 @@ export function SmartWhatsAppDrawer() {
   } = useConsultation();
   const uniqueId = useId();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const formContentRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const businessNameRef = useRef<HTMLInputElement>(null);
   const businessTypeRef = useRef<HTMLButtonElement>(null);
@@ -82,7 +84,10 @@ export function SmartWhatsAppDrawer() {
     document.body.style.overflow = "hidden";
     if (!dialog.open) dialog.showModal();
 
-    const focusFrame = window.requestAnimationFrame(() => nameRef.current?.focus({ preventScroll: true }));
+    const focusFrame = window.requestAnimationFrame(() => {
+      if (formContentRef.current) formContentRef.current.scrollTop = 0;
+      nameRef.current?.focus({ preventScroll: true });
+    });
 
     return () => {
       window.cancelAnimationFrame(focusFrame);
@@ -133,7 +138,7 @@ export function SmartWhatsAppDrawer() {
 
   const problemTitles = selectedProblems.map((value) => problems.find((problem) => problem.id === value || problem.title === value)?.title ?? value);
   const hasSelections = problemTitles.length > 0 || Boolean(selectedServiceOrPackage) || Boolean(portfolioReference);
-  const inputClassName = "mt-2 min-h-[48px] w-full min-w-0 rounded-xl border bg-white px-4 py-3 text-base text-[#0F172A] outline-none transition-colors focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 motion-reduce:transition-none";
+  const inputClassName = "mt-2 min-h-[48px] w-full min-w-0 rounded-xl border bg-white px-4 py-3 text-base text-[#121A2D] outline-none transition-colors focus:border-[#2448ED] focus:ring-2 focus:ring-blue-100 motion-reduce:transition-none";
 
   return (
     <dialog
@@ -144,62 +149,28 @@ export function SmartWhatsAppDrawer() {
       onCancel={(event) => { event.preventDefault(); closeDrawer(); }}
       onClose={() => { if (!dialogRef.current?.open) closeDrawer(); }}
       onClick={handleBackdropClick}
-      className="fixed inset-x-0 top-auto bottom-0 m-0 mx-auto max-h-[92dvh] w-full max-w-2xl overflow-hidden rounded-t-[2rem] border-0 bg-white p-0 text-[#0F172A] shadow-2xl backdrop:bg-slate-900/55 backdrop:backdrop-blur-sm md:inset-y-0 md:my-auto md:rounded-[2rem]"
+      className="consultation-dialog fixed inset-x-0 top-auto bottom-0 m-0 mx-auto max-h-[92dvh] w-full max-w-2xl overflow-hidden rounded-t-[2rem] border-0 bg-white p-0 text-[#121A2D] shadow-2xl backdrop:bg-slate-900/55 backdrop:backdrop-blur-sm md:inset-y-0 md:my-auto md:rounded-[2rem]"
     >
       <div className="flex max-h-[92dvh] min-h-0 flex-col">
         <div aria-hidden="true" className="mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-slate-200 md:hidden" />
         <div className="flex shrink-0 items-start justify-between gap-3 border-b border-slate-200 px-4 pb-4 pt-3 sm:px-6 md:pt-5">
           <div className="min-w-0 pt-1">
+            <p className="drawer-eyebrow">KONSULTASI / VIA WHATSAPP</p>
             <h2 id={`${uniqueId}-title`} className="text-xl font-bold leading-7 tracking-tight sm:text-2xl">{sectionCopy.drawer.title}</h2>
-            <p id={`${uniqueId}-description`} className="mt-2 text-sm leading-6 text-slate-600">Ceritakan kondisi bisnis Anda. Pilihan dan catatan Anda akan disiapkan menjadi pesan WhatsApp.</p>
+            <p id={`${uniqueId}-description`} className="mt-2 text-sm leading-6 text-slate-600">Isi detail bisnis Anda untuk menyiapkan draf pesan WhatsApp.</p>
           </div>
           <button
             type="button"
             onClick={closeDrawer}
             aria-label={sectionCopy.drawer.closeLabel}
-            className="inline-flex min-h-[48px] min-w-[48px] shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition-colors hover:bg-slate-200 hover:text-[#0F172A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] motion-reduce:transition-none"
+            className="inline-flex min-h-[48px] min-w-[48px] shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-600 transition-colors hover:bg-slate-200 hover:text-[#121A2D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2448ED] motion-reduce:transition-none"
           >
             <X aria-hidden="true" className="size-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="flex min-h-0 flex-1 flex-col overflow-hidden">
-          <div className="min-h-0 min-w-0 flex-1 space-y-6 overflow-y-auto px-4 py-5 sm:px-6">
-            <section aria-labelledby={`${uniqueId}-summary-title`} className="min-w-0 rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
-              <h3 id={`${uniqueId}-summary-title`} className="flex items-center gap-2 text-sm font-bold text-[#2563EB]">
-                <CheckCheck aria-hidden="true" className="size-4 shrink-0" />Ringkasan pilihan Anda
-              </h3>
-              {hasSelections ? (
-                <dl className="mt-3 space-y-3 text-sm leading-6">
-                  {selectedServiceOrPackage && <div><dt className="font-semibold">Layanan / paket</dt><dd className="break-words text-slate-600">{selectedServiceOrPackage}</dd></div>}
-                  {problemTitles.length > 0 && <div><dt className="font-semibold">Masalah bisnis</dt><dd><ul className="mt-1 list-disc space-y-1 pl-5 text-slate-600">{problemTitles.map((title, index) => <li key={`${index}-${title}`} className="break-words">{title}</li>)}</ul></dd></div>}
-                  {portfolioReference && <div><dt className="font-semibold">Referensi portofolio</dt><dd className="break-words text-slate-600">{portfolioReference}</dd></div>}
-                </dl>
-              ) : <p className="mt-2 text-sm leading-6 text-slate-600">Belum memilih layanan? Anda bisa langsung menceritakan kondisi bisnis atau memilih paket di bawah ini.</p>}
-            </section>
-
-            <fieldset className="min-w-0">
-              <legend className="text-sm font-semibold">Pilihan paket <span className="font-normal text-slate-500">(opsional)</span></legend>
-              <p className="mt-1 text-xs leading-6 text-slate-500">Pilih paket yang ingin didiskusikan. Catatan tambahan Anda tetap tersimpan.</p>
-              <div className="mt-3 grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
-                {packages.map((pkg) => {
-                  const isSelected = selectedServiceOrPackage === pkg.name;
-                  return (
-                    <button
-                      key={pkg.id}
-                      type="button"
-                      aria-pressed={isSelected}
-                      onClick={() => selectOffer(pkg.name)}
-                      className={`inline-flex min-h-[48px] min-w-0 items-center justify-between gap-2 rounded-xl border px-3 py-3 text-left text-sm font-medium leading-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2 motion-reduce:transition-none ${isSelected ? "border-[#2563EB] bg-blue-50 text-[#2563EB]" : "border-slate-200 bg-white text-slate-600 hover:border-blue-300"}`}
-                    >
-                      <span className="min-w-0 break-words">{pkg.name}</span>
-                      {isSelected && <Check aria-hidden="true" className="size-4 shrink-0" />}
-                    </button>
-                  );
-                })}
-              </div>
-            </fieldset>
-
+          <div ref={formContentRef} className="min-h-0 min-w-0 flex-1 space-y-5 overflow-y-auto px-4 py-5 sm:px-6">
             <div className="grid min-w-0 gap-5 sm:grid-cols-2">
               <div className="min-w-0">
                 <label htmlFor={`${uniqueId}-name`} className="text-sm font-semibold">{sectionCopy.drawer.nameLabel} <span className="text-red-600" aria-hidden="true">*</span></label>
@@ -239,7 +210,7 @@ export function SmartWhatsAppDrawer() {
 
             <fieldset className="min-w-0" aria-describedby={errors.businessType ? `${uniqueId}-business-type-error` : undefined}>
               <legend className="text-sm font-semibold">{sectionCopy.drawer.businessTypeLabel} <span className="text-red-600" aria-hidden="true">*</span><span className="sr-only">wajib dipilih</span></legend>
-              <div className="mt-3 grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
+              <div className="mt-3 grid min-w-0 grid-cols-2 gap-2">
                 {businessTypes.map((type, index) => {
                   const isSelected = businessType === type;
                   return (
@@ -251,7 +222,7 @@ export function SmartWhatsAppDrawer() {
                       aria-invalid={Boolean(errors.businessType)}
                       aria-describedby={errors.businessType ? `${uniqueId}-business-type-error` : undefined}
                       onClick={() => { setBusinessType(type); clearError("businessType"); }}
-                      className={`inline-flex min-h-[48px] min-w-0 items-center justify-between gap-2 rounded-xl border px-3 py-3 text-left text-sm font-medium leading-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] focus-visible:ring-offset-2 motion-reduce:transition-none ${isSelected ? "border-[#2563EB] bg-blue-50 text-[#2563EB]" : errors.businessType ? "border-red-300 bg-white text-slate-600" : "border-slate-200 bg-white text-slate-600 hover:border-blue-300"}`}
+                      className={`inline-flex min-h-[48px] min-w-0 items-center justify-between gap-2 rounded-xl border px-3 py-3 text-left text-sm font-medium leading-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2448ED] focus-visible:ring-offset-2 motion-reduce:transition-none ${isSelected ? "border-[#2448ED] bg-blue-50 text-[#2448ED]" : errors.businessType ? "border-red-300 bg-white text-slate-600" : "border-slate-200 bg-white text-slate-600 hover:border-blue-300"}`}
                     >
                       <span className="min-w-0 break-words">{type}</span>
                       {isSelected && <Check aria-hidden="true" className="size-4 shrink-0" />}
@@ -264,18 +235,18 @@ export function SmartWhatsAppDrawer() {
 
             <div className="min-w-0">
               <label htmlFor={`${uniqueId}-needs`} className="text-sm font-semibold">{sectionCopy.drawer.needsLabel} <span className="text-red-600" aria-hidden="true">*</span></label>
-              <p id={`${uniqueId}-needs-hint`} className="mt-1 text-xs leading-6 text-slate-500">Pilihan Anda sudah disiapkan. Silakan sesuaikan dan tambahkan catatan tentang bisnis Anda.</p>
+              <p id={`${uniqueId}-needs-hint`} className="mt-1 text-xs leading-6 text-slate-500">{hasSelections ? "Anda bisa mengedit isian dari pilihan sebelumnya." : "Ceritakan kendala atau bantuan yang Anda butuhkan."}</p>
               <textarea
                 ref={needsRef}
                 id={`${uniqueId}-needs`}
                 name="needs"
-                rows={5}
+                rows={3}
                 required
                 value={needsText}
                 onChange={(event) => { setNeedsText(event.target.value); clearError("needs"); }}
                 aria-invalid={Boolean(errors.needs)}
                 aria-describedby={`${uniqueId}-needs-hint${errors.needs ? ` ${uniqueId}-needs-error` : ""}`}
-                className={`${inputClassName} min-h-[140px] resize-y leading-7 ${errors.needs ? "border-red-400" : "border-slate-300"}`}
+                className={`${inputClassName} min-h-[108px] resize-y leading-7 ${errors.needs ? "border-red-400" : "border-slate-300"}`}
               />
               {errors.needs && <p id={`${uniqueId}-needs-error`} className="mt-2 text-xs leading-5 text-red-600">{errors.needs}</p>}
             </div>
@@ -293,12 +264,47 @@ export function SmartWhatsAppDrawer() {
               />
             </div>
             <p className="text-xs leading-6 text-slate-500"><span aria-hidden="true">*</span> Kolom wajib diisi.</p>
+
+            {hasSelections ? <section aria-labelledby={`${uniqueId}-summary-title`} className="drawer-summary min-w-0 border p-4">
+              <h3 id={`${uniqueId}-summary-title`} className="flex items-center gap-2 text-sm font-bold text-[#2448ED]">
+                <CheckCheck aria-hidden="true" className="size-4 shrink-0" />Ringkasan pilihan Anda
+              </h3>
+              <dl className="mt-3 space-y-3 text-sm leading-6">
+                {selectedServiceOrPackage && <div><dt className="font-semibold">Layanan / paket</dt><dd className="break-words text-slate-600">{selectedServiceOrPackage}</dd></div>}
+                {problemTitles.length > 0 && <div><dt className="font-semibold">Masalah bisnis</dt><dd><ul className="mt-1 list-disc space-y-1 pl-5 text-slate-600">{problemTitles.map((title, index) => <li key={`${index}-${title}`} className="break-words">{title}</li>)}</ul></dd></div>}
+                {portfolioReference && <div><dt className="font-semibold">Referensi portofolio</dt><dd className="break-words text-slate-600">{portfolioReference}</dd></div>}
+              </dl>
+            </section> : null}
+
+            <details className="compact-details drawer-options">
+              <summary>Pilihan paket (opsional)<Plus aria-hidden="true" /></summary>
+              <fieldset className="min-w-0 pb-3" aria-label="Pilihan paket">
+                <p className="mt-1 text-xs leading-6 text-slate-500">Pilih paket yang ingin didiskusikan. Catatan tambahan Anda tetap tersimpan.</p>
+                <div className="mt-3 grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2">
+                  {packages.map((pkg) => {
+                    const isSelected = selectedServiceOrPackage === pkg.name;
+                    return (
+                      <button
+                        key={pkg.id}
+                        type="button"
+                        aria-pressed={isSelected}
+                        onClick={() => selectOffer(pkg.name)}
+                        className={`inline-flex min-h-[48px] min-w-0 items-center justify-between gap-2 rounded-xl border px-3 py-3 text-left text-sm font-medium leading-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2448ED] focus-visible:ring-offset-2 motion-reduce:transition-none ${isSelected ? "border-[#2448ED] bg-blue-50 text-[#2448ED]" : "border-slate-200 bg-white text-slate-600 hover:border-blue-300"}`}
+                      >
+                        <span className="min-w-0 break-words">{pkg.name}</span>
+                        {isSelected && <Check aria-hidden="true" className="size-4 shrink-0" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            </details>
           </div>
 
           <div className="shrink-0 border-t border-slate-200 bg-white px-4 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
             <button
               type="submit"
-              className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-3 rounded-2xl bg-[#059669] px-4 py-3 text-left text-sm font-semibold leading-6 text-white transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#059669] focus-visible:ring-offset-4 motion-reduce:transition-none sm:text-base"
+              className="inline-flex min-h-[48px] w-full min-w-0 items-center justify-center gap-3 rounded-2xl bg-[#2448ED] px-4 py-3 text-left text-sm font-semibold leading-6 text-white transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2448ED] focus-visible:ring-offset-4 motion-reduce:transition-none sm:text-base"
             >
               <MessageCircle aria-hidden="true" className="size-5 shrink-0" />
               <span className="min-w-0">{sectionCopy.drawer.submitLabel}</span>
@@ -314,44 +320,17 @@ export function SmartWhatsAppDrawer() {
 
 export function StickyContactBar() {
   const { openDrawer } = useConsultation();
-
-  function navigateToSection(event: MouseEvent<HTMLAnchorElement>, href: "#paket" | "#portofolio"): void {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const target = document.getElementById(href.slice(1));
-    if (!target) return;
-    event.preventDefault();
-    target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-    window.history.pushState(null, "", href);
-  }
-
   return (
     <>
-      <nav aria-label="Akses cepat konsultasi" className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 grid min-w-0 grid-cols-[1fr_1fr_1.1fr] gap-1 rounded-2xl border border-slate-200 bg-white/95 p-1.5 text-[#0F172A] shadow-[0_8px_30px_rgba(15,23,42,0.16)] backdrop-blur-xl md:hidden">
-        <a href="#paket" onClick={(event) => navigateToSection(event, "#paket")} className="flex min-h-[48px] min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1.5 text-center text-[11px] font-semibold transition-colors hover:bg-blue-50 hover:text-[#2563EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] motion-reduce:transition-none">
-          <Tag aria-hidden="true" className="size-4 shrink-0" />
-          <span>{sectionCopy.mobileBar.packagesLabel}</span>
-        </a>
-        <a href="#portofolio" onClick={(event) => navigateToSection(event, "#portofolio")} className="flex min-h-[48px] min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 py-1.5 text-center text-[11px] font-semibold transition-colors hover:bg-blue-50 hover:text-[#2563EB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB] motion-reduce:transition-none">
-          <PanelsTopLeft aria-hidden="true" className="size-4 shrink-0" />
-          <span>{sectionCopy.mobileBar.portfolioLabel}</span>
-        </a>
-        <button type="button" onClick={() => openDrawer()} className="flex min-h-[48px] min-w-0 flex-col items-center justify-center gap-1 rounded-xl bg-[#059669] px-1 py-1.5 text-center text-[11px] font-semibold text-white transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#059669] focus-visible:ring-offset-2 motion-reduce:transition-none">
-          <MessageCircle aria-hidden="true" className="size-4 shrink-0" />
-          <span>{sectionCopy.mobileBar.consultationLabel}</span>
-        </button>
+      <nav aria-label="Akses cepat konsultasi" className="contact-dock">
+        <Link href="/#paket"><Tag aria-hidden="true" /><span>{sectionCopy.mobileBar.packagesLabel}</span></Link>
+        <Link href="/portofolio/"><PanelsTopLeft aria-hidden="true" /><span>{sectionCopy.mobileBar.portfolioLabel}</span></Link>
+        <button type="button" onClick={() => openDrawer()}><MessageCircle aria-hidden="true" /><span>{sectionCopy.mobileBar.consultationLabel}</span></button>
       </nav>
-      <button
-        type="button"
-        onClick={() => openDrawer()}
-        aria-label="Konsultasi bisnis via WhatsApp"
-        className="fixed bottom-6 right-6 z-40 hidden min-h-[56px] items-center justify-center gap-2 rounded-full bg-[#059669] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20 transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#059669] focus-visible:ring-offset-4 motion-reduce:transition-none md:flex"
-      >
-        <MessageCircle aria-hidden="true" className="size-5 shrink-0" />
-        <span>{sectionCopy.mobileBar.consultationLabel}</span>
-        <BriefcaseBusiness aria-hidden="true" className="size-4 shrink-0" />
+      <button type="button" onClick={() => openDrawer()} aria-label="Konsultasi bisnis via WhatsApp" className="desktop-contact">
+        <MessageCircle aria-hidden="true" /><span className="desktop-contact__label"><BriefcaseBusiness aria-hidden="true" />{sectionCopy.mobileBar.consultationLabel}</span>
       </button>
     </>
   );
 }
-
 export default SmartWhatsAppDrawer;

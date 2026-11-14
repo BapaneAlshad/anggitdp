@@ -31,13 +31,14 @@ export interface HeroContent {
   description: string;
   primaryCtaLabel: string;
   secondaryCtaLabel: string;
-  secondaryCtaHref: "#portofolio";
+  secondaryCtaHref: "/#paket";
   stats: readonly HeroStat[];
 }
 
 export interface ProblemItem {
   id: string;
   title: string;
+  shortLabel: string;
   description: string;
   recommendedPackageId: PackageId;
 }
@@ -62,8 +63,10 @@ export interface PackageItem {
   name: string;
   subtitle: string;
   priceText: string;
+  benefit: string;
   badge: string | null;
   features: readonly string[];
+  scopeNote?: string;
   isPopular: boolean;
 }
 
@@ -71,12 +74,14 @@ export interface PortfolioCaseStudy {
   id: string;
   brandName: string;
   category: string;
-  metricHighlight: string;
+  metricValue: string;
+  metricLabel: string;
   challenge: string;
   role: string;
   approach: string;
   result: string;
   insight: string;
+  photo?: { src: string; alt: string; caption: string; width: number; height: number };
 }
 
 export interface ConsultationStep {
@@ -108,7 +113,7 @@ export interface SocialContact {
 
 export interface NavigationItem {
   label: string;
-  href: "#tentang" | "#layanan" | "#paket" | "#portofolio" | "#faq";
+  href: "/#tentang" | "/#layanan" | "/#paket" | "/portofolio/" | "/#faq";
 }
 
 export interface ConsultationFormData {
